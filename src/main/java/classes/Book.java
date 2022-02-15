@@ -13,7 +13,7 @@ public class Book {
         this.yearOfCreation = yearOfCreation;
     }
 
-    public Book getBook(){
+    public Book getBook() {
         return this;
     }
 }

@@ -1,6 +1,6 @@
 package abstract_classes;
 
-abstract class Building {
+public abstract class Building {
 
     private String name;
     private String address;
@@ -9,7 +9,7 @@ abstract class Building {
     private boolean isCulturalMonument;
 
     {
-        name = "undefined";
+        name = "undefined"; 
         address = "undefined";
         architect = "undefined";
         year = -1;

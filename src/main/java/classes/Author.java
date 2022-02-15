@@ -3,10 +3,12 @@ package classes;
 import interfaces.Person;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Author implements Person {
     private final String name;
     private final LocalDate dateOfBirth;
+    private List<Book> books;
 
     public Author(String name, LocalDate dateOfBirth) {
         this.name = name;
