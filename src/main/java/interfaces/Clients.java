@@ -1,6 +1,6 @@
 package interfaces;
 
-public interface Clients extends Person {
+public interface Clients {
     boolean isMinor();
 }
 

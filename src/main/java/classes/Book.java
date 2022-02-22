@@ -16,4 +16,8 @@ public class Book {
     public Book getBook() {
         return this;
     }
+
+    public boolean isTheSameBook(Book that){
+        return this.title.equals(that.title) && this.author.equals(that.author) && this.yearOfCreation == that.yearOfCreation;
+    }
 }
