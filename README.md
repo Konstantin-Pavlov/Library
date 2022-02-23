@@ -1,3 +1,3 @@
-# **org.library.Library**
-* org.library.Library simulation
+# **Library**
+* Library simulation
 
