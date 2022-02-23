@@ -1,6 +1,4 @@
-package classes;
-
-import abstract_classes.Person;
+package org.library;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -35,6 +33,6 @@ public class Author extends Person {
     }
 
     public String toString() {
-        return "Author{" + "name='" + getFullName() + '\'' + ", dateOfBirth=" + getDateOfBirth() + '}';
+        return "org.library.Author{" + "name='" + getFullName() + '\'' + ", dateOfBirth=" + getDateOfBirth() + '}';
     }
 }

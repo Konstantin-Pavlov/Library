@@ -1,4 +1,4 @@
-package abstract_classes;
+package org.library;
 
 public abstract class Building {
 

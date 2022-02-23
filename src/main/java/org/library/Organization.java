@@ -1,4 +1,4 @@
-package interfaces;
+package org.library;
 
 public interface Organization {
     void hireAnEmployee();

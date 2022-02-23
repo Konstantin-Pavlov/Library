@@ -1,9 +1,9 @@
-package abstract_classes;
+package org.library;
 
 import java.time.LocalDate;
 
-//People implements Person is wrong
-//  убрать всё в Person?
+//People implements org.library.Person is wrong
+//  убрать всё в org.library.Person?
 //  убрать пакеты
 
 public abstract class Person {
