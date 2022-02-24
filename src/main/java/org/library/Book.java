@@ -1,10 +1,10 @@
 package org.library;
 
 public class Book {
-    String title;
-    Author author;
-    int price;
-    int yearOfCreation;
+    private String title;
+    private Author author;
+    private int price;
+    private int yearOfCreation;
 
     public Book(String title, Author author, int price, int yearOfCreation) {
         this.title = title;
@@ -19,6 +19,18 @@ public class Book {
 
     public boolean isTheSameBook(Book that){
         return this.title.equals(that.title) && this.author.equals(that.author) && this.yearOfCreation == that.yearOfCreation;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public int getYearOfCreation() {
+        return yearOfCreation;
     }
 
     @Override

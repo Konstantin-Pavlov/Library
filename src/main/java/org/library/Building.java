@@ -9,7 +9,7 @@ public abstract class Building {
     private boolean isCulturalMonument;
 
     {
-        name = "undefined"; 
+        name = "undefined";
         address = "undefined";
         architect = "undefined";
         year = -1;

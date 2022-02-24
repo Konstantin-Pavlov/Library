@@ -1,10 +1,11 @@
 package org.library;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Author extends Person {
-    private List<Book> books;
+    private final List<Book> books = new ArrayList<>();
     public static int numberOfAuthors = 0;
 
     {
@@ -21,6 +22,14 @@ public class Author extends Person {
     boolean isTheSameAuthor(Author that) {
         return this.getFullName().equals(that.getFullName()) && this.getDateOfBirth().equals(that.getDateOfBirth());
 
+    }
+
+    public void addBook(Book book){
+        books.add(book);
+    }
+
+    public List<Book> getAuthorsBooksList(){
+        return books;
     }
 
     private void onCreate() {

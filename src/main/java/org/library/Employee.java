@@ -1,6 +1,7 @@
 package org.library;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 public class Employee extends Person{
     private final int id;
@@ -11,10 +12,26 @@ public class Employee extends Person{
 
     @Override
     public String getData() {
-        return null;
+        return toString();
+    }
+
+
+    public int getAge() {
+        return Period.between(getDateOfBirth(), LocalDate.now()).getYears();
     }
 
     public int getId() {
         return id;
+    }
+
+
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                '}';
     }
 }

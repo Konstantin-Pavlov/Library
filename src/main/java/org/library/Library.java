@@ -11,6 +11,8 @@ public class Library extends Building {
 
     private final List<Book> books = new ArrayList<>();
     private final List<Author> authors = new ArrayList<>();
+    private final List<Employee> employees = new ArrayList<>();
+    private final List<Client> readers = new ArrayList<>();
 
     public Library(String name, String address, String architect, int year, boolean isCulturalMonument) {
         super(name, address, architect, year, isCulturalMonument);
@@ -24,25 +26,42 @@ public class Library extends Building {
         return authors;
     }
 
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public List<Client> getReaders() {
+        return readers;
+    }
+
     public void addBook(Book book) {
         books.add(book);
-        authors.add(book.author);
+        authors.add(book.getAuthor());
+        book.getAuthor().addBook(book);
         booksCount++;
         authorsCount++;
     }
 
-    public void addReader() {
-        readersCount++;
+    public void addReader(Client client) {
+        readers.add(client);
+    }
+
+    public void addEmployee(Employee employee) {
+        employees.add(employee);
     }
 
     public int getTotalNumberOfPeople() {
-        return readersCount + employeesCount;
+        return readers.size() + employees.size();
     }
+
+
 
     @Override
     public String toString() {
         return super.toString() + ", " +
                 "books=" + booksCount +
-                ", authors=" + authorsCount;
+                ", authors=" + authorsCount +
+                ", readers=" + readers.size() +
+                ", employees=" + employees.size();
     }
 }
