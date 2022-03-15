@@ -3,6 +3,7 @@ package org.library;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Author extends Person {
     private final List<Book> books = new ArrayList<>();
@@ -19,16 +20,27 @@ public class Author extends Person {
     }
 
     // is this the same author as the given one?
-    boolean isTheSameAuthor(Author that) {
-        return this.getFullName().equals(that.getFullName()) && this.getDateOfBirth().equals(that.getDateOfBirth());
-
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Author AnotherAuthor = (Author) o;
+        return Objects.equals(books, AnotherAuthor.books) &&
+                this.firstName.equals(AnotherAuthor.firstName) &&
+                this.lastName.equals(AnotherAuthor.lastName) &&
+                this.dateOfBirth.equals(AnotherAuthor.dateOfBirth);
     }
 
-    public void addBook(Book book){
+    @Override
+    public int hashCode() {
+        return Objects.hash(books);
+    }
+
+    public void addBook(Book book) {
         books.add(book);
     }
 
-    public List<Book> getAuthorsBooksList(){
+    public List<Book> getAuthorsBooksList() {
         return books;
     }
 

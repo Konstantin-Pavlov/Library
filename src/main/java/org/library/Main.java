@@ -9,9 +9,11 @@ public class Main {
         Author John = new Author("John", "Darvin", LocalDate.of(1954, 7, 3));
         Author Martin = new Author("Martin", "Reed", LocalDate.of(1789, 4, 16));
 
+        Book theBeast = new Book("The beast", Martin, 51, 1841);
+
         library.addBook(new Book("Great Book", Bill, 79, 1929));
         library.addBook(new Book("Outstanding cat", John, 42, 1984));
-        library.addBook(new Book("The beast", Martin, 51, 1841));
+        library.addBook(theBeast);
         library.addBook(new Book("Great Book", Bill, 79, 1929));
 
         library.addReader(new Client("Nick", "Romanoff", LocalDate.of(2009, 4, 3)));
@@ -22,10 +24,12 @@ public class Main {
         Book book1 = new Book("Great Book", Bill, 79, 1929);
         Book book2 = new Book("Great Book", Bill, 79, 1929);
         Author writer = new Author("Martin", "Reed", LocalDate.of(1789, 4, 16));
+        writer.addBook(theBeast);
 
-        System.out.println(book1.isTheSameBook(book2));
-        System.out.println(Martin.isTheSameAuthor(writer));
-        System.out.println(Martin.isTheSameAuthor(John));
+        System.out.println(book1);
+        System.out.println(book1.equals(book2));
+        System.out.println(Martin.equals(writer));
+        System.out.println(Martin.equals(John));
 
         System.out.println();
 
@@ -35,24 +39,24 @@ public class Main {
 
         System.out.println();
 
-        for (Book book: library.getBooksList()) {
+        for (Book book : library.getBooksList()) {
             System.out.println("Title: " + book.getTitle() + " " + "Author: " + book.getAuthor().getFullName());
         }
 
         System.out.println();
 
-        for (Author author: library.getAuthorsList()) {
+        for (Author author : library.getAuthorsList()) {
             System.out.println("Name: " + author.getFullName() + " " + "Author's books: " + author.getAuthorsBooksList());
         }
 
 
-        for (Client client: library.getReaders()) {
+        for (Client client : library.getReaders()) {
             System.out.println("name: " + client.getFullName() + ". Is minor? " + (client.isMinor() ? "yes." : "no.") + " Age: " + client.getAge());
         }
 
         System.out.println();
 
-        for (Employee employee: library.getEmployees()) {
+        for (Employee employee : library.getEmployees()) {
             System.out.println("name: " + employee.getFullName() + " Age: " + employee.getAge());
         }
 

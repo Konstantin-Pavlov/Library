@@ -13,8 +13,16 @@ public class Client extends Person {
         return Period.between(getDateOfBirth(), LocalDate.now()).getYears() < 18;
     }
 
-    int getAge(){
+    int getAge() {
         return Period.between(getDateOfBirth(), LocalDate.now()).getYears();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Client AnotherClient = (Client) o;
+        return this.firstName.equals(AnotherClient.firstName) && this.lastName.equals(AnotherClient.lastName) && this.dateOfBirth.equals(AnotherClient.dateOfBirth);
     }
 
     @Override
@@ -24,11 +32,7 @@ public class Client extends Person {
 
     @Override
     public String toString() {
-        return "Client{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
-                '}';
+        return "Client{" + "firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + ", dateOfBirth=" + dateOfBirth + '}';
     }
 }
 

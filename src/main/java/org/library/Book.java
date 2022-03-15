@@ -1,10 +1,12 @@
 package org.library;
 
+import java.util.Objects;
+
 public class Book {
-    private String title;
-    private Author author;
-    private int price;
-    private int yearOfCreation;
+    private final String title;
+    private final Author author;
+    private final int price;
+    private final int yearOfCreation;
 
     public Book(String title, Author author, int price, int yearOfCreation) {
         this.title = title;
@@ -13,12 +15,22 @@ public class Book {
         this.yearOfCreation = yearOfCreation;
     }
 
-    public Book getBook() {
-        return this;
+
+    // is the same book
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book AnotherBook = (Book) o;
+        return this.price == AnotherBook.price &&
+                this.yearOfCreation == AnotherBook.yearOfCreation &&
+                this.title.equals(AnotherBook.title) &&
+                this.author.equals(AnotherBook.author);
     }
 
-    public boolean isTheSameBook(Book that){
-        return this.title.equals(that.title) && this.author.equals(that.author) && this.yearOfCreation == that.yearOfCreation;
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, author, price, yearOfCreation);
     }
 
     public String getTitle() {

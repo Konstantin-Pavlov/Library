@@ -17,7 +17,7 @@ public class Library extends Building {
     public Library(String name, String address, String architect, int year, boolean isCulturalMonument) {
         super(name, address, architect, year, isCulturalMonument);
     }
-    
+
     public List<Book> getBooksList() {
         return books;
     }
@@ -53,7 +53,6 @@ public class Library extends Building {
     public int getTotalNumberOfPeople() {
         return readers.size() + employees.size();
     }
-
 
 
     @Override

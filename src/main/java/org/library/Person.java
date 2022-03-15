@@ -7,10 +7,9 @@ import java.time.LocalDate;
 //  убрать пакеты
 
 public abstract class Person {
-      String firstName;
-      String lastName;
-      LocalDate dateOfBirth;
-
+    String firstName;
+    String lastName;
+    LocalDate dateOfBirth;
 
 
     public Person(String firstName, String lastName, LocalDate dateOfBirth) {
@@ -18,6 +17,8 @@ public abstract class Person {
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
     }
+
+    public abstract boolean equals(Object o);
 
     public abstract String getData();
 
