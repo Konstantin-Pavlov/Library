@@ -1,4 +1,7 @@
-package org.library;
+package org.library.model;
+
+
+import org.library.abstract_classes.Person;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -26,9 +29,9 @@ public class Author extends Person {
         if (o == null || getClass() != o.getClass()) return false;
         Author AnotherAuthor = (Author) o;
         return Objects.equals(books, AnotherAuthor.books) &&
-                this.firstName.equals(AnotherAuthor.firstName) &&
-                this.lastName.equals(AnotherAuthor.lastName) &&
-                this.dateOfBirth.equals(AnotherAuthor.dateOfBirth);
+                this.getFirstName().equals(AnotherAuthor.getFirstName()) &&
+                this.getLastName().equals(AnotherAuthor.getLastName()) &&
+                this.getDateOfBirth().equals(AnotherAuthor.getDateOfBirth());
     }
 
     @Override

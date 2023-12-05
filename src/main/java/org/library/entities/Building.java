@@ -1,4 +1,4 @@
-package org.library;
+package org.library.entities;
 
 public abstract class Building {
 

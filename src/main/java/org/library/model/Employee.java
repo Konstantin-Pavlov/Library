@@ -1,4 +1,6 @@
-package org.library;
+package org.library.model;
+
+import org.library.abstract_classes.Person;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -18,9 +20,9 @@ public class Employee extends Person {
         if (o == null || getClass() != o.getClass()) return false;
         Employee AnotherEmployee = (Employee) o;
         return this.id == AnotherEmployee.id &&
-                this.firstName.equals(AnotherEmployee.firstName) &&
-                this.lastName.equals(AnotherEmployee.lastName) &&
-                this.dateOfBirth.equals(AnotherEmployee.dateOfBirth);
+                this.getFirstName().equals(AnotherEmployee.getFirstName()) &&
+                this.getLastName().equals(AnotherEmployee.getLastName()) &&
+                this.getDateOfBirth().equals(AnotherEmployee.getDateOfBirth());
     }
 
     @Override
@@ -45,6 +47,9 @@ public class Employee extends Person {
 
     @Override
     public String toString() {
-        return "Employee{" + "firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + ", dateOfBirth=" + dateOfBirth + '}';
+        return "Employee{" + "firstName='" +
+                getFirstName() + '\'' + ", lastName='" +
+                getLastName() + '\'' + ", dateOfBirth=" +
+                getDateOfBirth() + '}';
     }
 }

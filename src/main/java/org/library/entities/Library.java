@@ -1,4 +1,9 @@
-package org.library;
+package org.library.entities;
+
+import org.library.model.Author;
+import org.library.model.Book;
+import org.library.model.Client;
+import org.library.model.Employee;
 
 import java.util.ArrayList;
 import java.util.List;

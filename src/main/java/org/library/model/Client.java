@@ -1,4 +1,6 @@
-package org.library;
+package org.library.model;
+
+import org.library.abstract_classes.Person;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -9,11 +11,11 @@ public class Client extends Person {
         super(firstName, lastName, dateOfBirth);
     }
 
-    boolean isMinor() {
+    public boolean isMinor() {
         return Period.between(getDateOfBirth(), LocalDate.now()).getYears() < 18;
     }
 
-    int getAge() {
+    public int getAge() {
         return Period.between(getDateOfBirth(), LocalDate.now()).getYears();
     }
 
@@ -22,7 +24,9 @@ public class Client extends Person {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Client AnotherClient = (Client) o;
-        return this.firstName.equals(AnotherClient.firstName) && this.lastName.equals(AnotherClient.lastName) && this.dateOfBirth.equals(AnotherClient.dateOfBirth);
+        return this.getFirstName().equals(AnotherClient.getFirstName()) &&
+                this.getLastName().equals(AnotherClient.getLastName()) &&
+                this.getDateOfBirth().equals(AnotherClient.getDateOfBirth());
     }
 
     @Override
@@ -32,7 +36,11 @@ public class Client extends Person {
 
     @Override
     public String toString() {
-        return "Client{" + "firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + ", dateOfBirth=" + dateOfBirth + '}';
+        return "Client{" + "firstName='" +
+                getFirstName() + '\'' +
+                ", lastName='" + getLastName() +
+                '\'' + ", dateOfBirth=" +
+                getDateOfBirth() + '}';
     }
 }
 
