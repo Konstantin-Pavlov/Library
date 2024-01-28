@@ -16,7 +16,6 @@ public class Author extends Person {
         onCreate();
     }
 
-
     public Author(String firstName, String lastName, LocalDate dateOfBirth) {
         super(firstName, lastName, dateOfBirth);
 
@@ -47,16 +46,16 @@ public class Author extends Person {
         return books;
     }
 
-    private void onCreate() {
-        numberOfAuthors++;
-    }
-
     @Override
     public String getData() {
         return toString();
     }
 
+    private void onCreate() {
+        numberOfAuthors++;
+    }
+
     public String toString() {
-        return "org.library.Author{" + "name='" + getFullName() + '\'' + ", dateOfBirth=" + getDateOfBirth() + '}';
+        return "Author name: " + getFullName() + ", dateOfBirth: " + getDateOfBirth() + "\n";
     }
 }
