@@ -5,9 +5,9 @@ import org.library.abstract_classes.Person;
 import java.time.LocalDate;
 import java.time.Period;
 
-public class Client extends Person {
+public class Visitor extends Person {
 
-    public Client(String firstName, String lastName, LocalDate dateOfBirth) {
+    public Visitor(String firstName, String lastName, LocalDate dateOfBirth) {
         super(firstName, lastName, dateOfBirth);
     }
 
@@ -23,7 +23,7 @@ public class Client extends Person {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Client AnotherClient = (Client) o;
+        Visitor AnotherClient = (Visitor) o;
         return this.getFirstName().equals(AnotherClient.getFirstName()) &&
                 this.getLastName().equals(AnotherClient.getLastName()) &&
                 this.getDateOfBirth().equals(AnotherClient.getDateOfBirth());
