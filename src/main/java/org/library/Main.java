@@ -14,7 +14,7 @@ public class Main {
         loadJdbcDriver();
 
 
-        Library library = new Library("City Public Library", "17th street", "Thompson", 1876, true);
+//        Library library = new Library("City Public Library", "17th street", "Thompson", 1876, true);
 
 
 //        printAuthorsFromDatabase();
@@ -54,6 +54,31 @@ public class Main {
 //        System.out.println();
 
 //        System.out.println(library);
+
+    }
+
+    private static void printBooksFromDatabase() {
+        try (Connection connection = connectToDatabase()) {
+            System.out.println("database loaded");
+
+            Statement statement = connection.createStatement();
+//            ResultSet resultSet = statement.executeQuery("select id, author_id, year, name from library.book");
+            ResultSet resultSet = statement.executeQuery("select * from library.book order by year");
+
+            while (resultSet.next()) {
+                String id = resultSet.getString("id");
+                String authorId = resultSet.getString("author_id");
+                String year = resultSet.getString("year");
+                String name = resultSet.getString("name");
+
+                System.out.printf("%-2s %-2s %-4s %-10s%n", id, authorId, year, name);
+
+            }
+            statement.close();
+        } catch (SQLException e) {
+            System.out.println("database failed to load");
+            e.printStackTrace();
+        }
 
     }
 
@@ -169,8 +194,6 @@ public class Main {
     }
 
     private static void printAuthorsFromDatabase() {
-
-
         try (Connection connection = connectToDatabase()) {
             System.out.println("database loaded");
 
@@ -191,7 +214,6 @@ public class Main {
             statement.close();
         } catch (SQLException e) {
             System.out.println("database failed to load");
-            e.printStackTrace();
         }
     }
 
