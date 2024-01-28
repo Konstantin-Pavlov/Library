@@ -3,6 +3,8 @@ package org.library;
 import org.library.entities.Library;
 import org.library.model.Author;
 import org.library.model.Book;
+import org.library.model.Employee;
+import org.library.model.Visitor;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -13,47 +15,8 @@ public class Main {
     public static void main(String[] args) {
         loadJdbcDriver();
 
+        Library library = new Library("City Public Library", "17th street", "Thompson", 1876, true);
 
-//        Library library = new Library("City Public Library", "17th street", "Thompson", 1876, true);
-
-
-//        printAuthorsFromDatabase();
-
-        printBooksFromDatabase();
-
-
-//
-//        library.addReader(new Client("Nick", "Romano", LocalDate.of(2009, 4, 3)));
-//        library.addReader(new Client("Jack", "Soul", LocalDate.of(1999, 8, 1)));
-//        library.addEmployee(new Employee("David", "Norfolk", LocalDate.of(1978, 7, 24), 1));
-//        library.addEmployee(new Employee("Ray", "Norton", LocalDate.of(1987, 9, 24), 2));
-
-
-//        for (Book book : library.getBooksList()) {
-//            System.out.println("Title: " + book.getTitle() + " " + "Author: " + book.getAuthor().getFullName());
-//        }
-//
-//        System.out.println();
-
-//        for (Author author : library.getAuthorsList()) {
-////            System.out.println("Name: " + author.getFullName() + " " + "Author's books: " + author.getAuthorsBooksList());
-//            System.out.println("Name: " + author.getFullName() + " " + "number of books: " + author.getAuthorsBooksList().size());
-//        }
-
-
-//        for (Client client : library.getReaders()) {
-//            System.out.println("name: " + client.getFullName() + ". Is minor? " + (client.isMinor() ? "yes." : "no.") + " Age: " + client.getAge());
-//        }
-
-//        System.out.println();
-
-//        for (Employee employee : library.getEmployees()) {
-//            System.out.println("name: " + employee.getFullName() + " Age: " + employee.getAge());
-//        }
-
-//        System.out.println();
-
-//        System.out.println(library);
 
     }
 
@@ -140,7 +103,6 @@ public class Main {
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-//            e.printStackTrace();
         }
     }
 
@@ -192,6 +154,96 @@ public class Main {
         }
 
     }
+    private static void addVisitorToDatabase(Visitor visitor) {
+
+        try (Connection connection = connectToDatabase()) {
+            System.out.println("Database loaded");
+
+            // Sample data for a new author
+            String name = visitor.getFirstName();
+            String surname = visitor.getLastName();
+            LocalDateTime birthDate = visitor.getDateOfBirth().atStartOfDay();
+
+            // Format birthDate as a String in "yyyy-MM-dd" format
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String formattedBirthDate = birthDate.format(formatter);
+
+            // Check if the author already exists
+            if (!visitorExists(connection, name, surname, birthDate)) {
+                // Insert data into the author table
+                String insertQuery = "INSERT INTO library.visitor (name, surname, birth_date) VALUES (?, ?, ?)";
+                try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
+                    preparedStatement.setString(1, name);
+                    preparedStatement.setString(2, surname);
+                    preparedStatement.setDate(3, Date.valueOf(formattedBirthDate));
+
+                    int rowsAffected = preparedStatement.executeUpdate();
+
+                    if (rowsAffected > 0) {
+                        System.out.println("Visitor added successfully!");
+                    } else {
+                        System.out.println("Failed to add visitor.");
+                    }
+                } catch (SQLException ex) {
+                    if (ex.getSQLState().startsWith("23")) { // Check for SQL state indicating integrity violation
+                        System.out.println("Failed to add visitor. Duplicate record.");
+                    } else {
+                        throw ex; // Rethrow if it's a different type of SQL exception
+                    }
+                }
+            } else {
+                System.out.println("Visitor already exists. Skipping insertion.");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+    private static void addEmployeeToDatabase(Employee employee) {
+
+        try (Connection connection = connectToDatabase()) {
+            System.out.println("Database loaded");
+
+            // Sample data for a new author
+            String name = employee.getFirstName();
+            String surname = employee.getLastName();
+            LocalDateTime birthDate = employee.getDateOfBirth().atStartOfDay();
+
+            // Format birthDate as a String in "yyyy-MM-dd" format
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String formattedBirthDate = birthDate.format(formatter);
+
+            // Check if the author already exists
+            if (!employerExists(connection, name, surname, birthDate)) {
+                // Insert data into the author table
+                String insertQuery = "INSERT INTO library.employee (name, surname, birth_date) VALUES (?, ?, ?)";
+                try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
+                    preparedStatement.setString(1, name);
+                    preparedStatement.setString(2, surname);
+                    preparedStatement.setDate(3, Date.valueOf(formattedBirthDate));
+
+                    int rowsAffected = preparedStatement.executeUpdate();
+
+                    if (rowsAffected > 0) {
+                        System.out.println("Employee added successfully!");
+                    } else {
+                        System.out.println("Failed to add employee.");
+                    }
+                } catch (SQLException ex) {
+                    if (ex.getSQLState().startsWith("23")) { // Check for SQL state indicating integrity violation
+                        System.out.println("Failed to add employee. Duplicate record.");
+                    } else {
+                        throw ex; // Rethrow if it's a different type of SQL exception
+                    }
+                }
+            } else {
+                System.out.println("Employee already exists. Skipping insertion.");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
 
     private static void printAuthorsFromDatabase() {
         try (Connection connection = connectToDatabase()) {
@@ -219,6 +271,36 @@ public class Main {
 
     private static boolean authorExists(Connection connection, String name, String surname, LocalDateTime birthDate) throws SQLException {
         String query = "SELECT COUNT(*) FROM library.author WHERE name = ? AND surname = ? AND birth_date = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, surname);
+            preparedStatement.setDate(3, Date.valueOf(birthDate.toLocalDate()));
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt(1) > 0;
+                }
+            }
+        }
+        return false;
+    }
+    private static boolean visitorExists(Connection connection, String name, String surname, LocalDateTime birthDate) throws SQLException {
+        String query = "SELECT COUNT(*) FROM library.visitor WHERE name = ? AND surname = ? AND birth_date = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, surname);
+            preparedStatement.setDate(3, Date.valueOf(birthDate.toLocalDate()));
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt(1) > 0;
+                }
+            }
+        }
+        return false;
+    }
+    private static boolean employerExists(Connection connection, String name, String surname, LocalDateTime birthDate) throws SQLException {
+        String query = "SELECT COUNT(*) FROM library.employee WHERE name = ? AND surname = ? AND birth_date = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, surname);
