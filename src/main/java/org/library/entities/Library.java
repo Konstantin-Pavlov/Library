@@ -2,7 +2,7 @@ package org.library.entities;
 
 import org.library.model.Author;
 import org.library.model.Book;
-import org.library.model.Client;
+import org.library.model.Visitor;
 import org.library.model.Employee;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class Library extends Building {
     private final List<Book> books = new ArrayList<>();
     private final List<Author> authors = new ArrayList<>();
     private final List<Employee> employees = new ArrayList<>();
-    private final List<Client> readers = new ArrayList<>();
+    private final List<Visitor> readers = new ArrayList<>();
 
     public Library(String name, String address, String architect, int year, boolean isCulturalMonument) {
         super(name, address, architect, year, isCulturalMonument);
@@ -35,7 +35,7 @@ public class Library extends Building {
         return employees;
     }
 
-    public List<Client> getReaders() {
+    public List<Visitor> getReaders() {
         return readers;
     }
 
@@ -57,7 +57,7 @@ public class Library extends Building {
         authorsCount++;
     }
 
-    public void addReader(Client client) {
+    public void addReader(Visitor client) {
         readers.add(client);
     }
 
