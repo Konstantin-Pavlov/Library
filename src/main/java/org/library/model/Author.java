@@ -27,7 +27,7 @@ public class Author extends Person {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Author AnotherAuthor = (Author) o;
-        return Objects.equals(books, AnotherAuthor.books) &&
+        return
                 this.getFirstName().equals(AnotherAuthor.getFirstName()) &&
                 this.getLastName().equals(AnotherAuthor.getLastName()) &&
                 this.getDateOfBirth().equals(AnotherAuthor.getDateOfBirth());
@@ -39,6 +39,10 @@ public class Author extends Person {
     }
 
     public void addBook(Book book) {
+        if (books.contains(book)) {
+            System.out.println("book already added to this author");
+            return;
+        }
         books.add(book);
     }
 
