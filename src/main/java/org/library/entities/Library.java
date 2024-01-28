@@ -40,6 +40,16 @@ public class Library extends Building {
     }
 
     public void addBook(Book book) {
+        if (books.contains(book)) {
+            System.out.printf("book %s already added to the library%n", book.getTitle());
+            return;
+        }
+        if (authors.contains(book.getAuthor())) {
+            System.out.printf("author %s already added to the library's authors list", book.getAuthor().getFullName());
+            books.add(book);
+            booksCount++;
+            return;
+        }
         books.add(book);
         authors.add(book.getAuthor());
         book.getAuthor().addBook(book);
